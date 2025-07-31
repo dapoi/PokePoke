@@ -62,11 +62,6 @@ internal fun AppNavHost(navGraphs: Set<@JvmSuppressWildcards BaseNavGraph>) {
             }
         }
 
-        /**
-         *
-         * Remove below code if you don't need bottom navigation
-         *
-         */
         AnimatedVisibility(visible = showBottomNav, enter = fadeIn(), exit = fadeOut()) {
             CompositionLocalProvider(LocalRippleConfiguration provides null) {
                 BottomAppBar(

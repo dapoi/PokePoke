@@ -19,8 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import com.project.compose.core.common.R
-import com.project.compose.core.common.ui.theme.AppTheme
+import com.project.compose.core.common.ui.theme.PokeTheme
 import com.project.compose.core.common.ui.theme.Dimens
 import com.project.compose.core.common.utils.onCustomClick
 
@@ -49,17 +48,19 @@ object AppTopBarAttr {
         icon: Int? = null,
         onClickBack: (() -> Unit)? = null
     ): @Composable () -> Unit = {
-        Box(
-            modifier = Modifier.Companion
-                .clip(CircleShape)
-                .onCustomClick { onClickBack?.invoke() },
-            contentAlignment = Alignment.Companion.Center
-        ) {
-            Icon(
-                imageVector = ImageVector.vectorResource(icon ?: R.drawable.ic_back),
-                contentDescription = "Back"
-            )
-        }
+       icon?.let {
+           Box(
+               modifier = Modifier.Companion
+                   .clip(CircleShape)
+                   .onCustomClick { onClickBack?.invoke() },
+               contentAlignment = Alignment.Companion.Center
+           ) {
+               Icon(
+                   imageVector = ImageVector.vectorResource(icon),
+                   contentDescription = "Back"
+               )
+           }
+       }
     }
 
     @Composable
@@ -95,7 +96,7 @@ object AppTopBarAttr {
     fun title(title: String): @Composable () -> Unit = {
         Text(
             text = title,
-            style = AppTheme.typography.h3.copy(fontWeight = FontWeight.Companion.Medium)
+            style = PokeTheme.typography.h3.copy(fontWeight = FontWeight.Companion.Medium)
         )
     }
 }

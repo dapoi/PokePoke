@@ -2,7 +2,7 @@ package com.project.compose.navigation.attr
 
 import com.project.compose.core.common.R
 import com.project.compose.core.navigation.route.HomeGraph.HomeLandingRoute
-import com.project.compose.core.navigation.route.InfoGraph.InfoLandingRoute
+import com.project.compose.core.navigation.route.InfoGraph.ProfileLandingRoute
 
 object AppNavHostAttr {
     data class BottomNavItem<T : Any>(
@@ -13,6 +13,6 @@ object AppNavHostAttr {
 
     fun getBottomNav() = listOf(
         BottomNavItem(route = HomeLandingRoute, icon = R.drawable.ic_home, label = "Home"),
-        BottomNavItem(route = InfoLandingRoute, icon = R.drawable.ic_info, label = "Info")
+        BottomNavItem(route = ProfileLandingRoute, icon = R.drawable.ic_profile, label = "Profile")
     )
 }

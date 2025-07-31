@@ -1,7 +1,7 @@
-package com.project.compose.feature.info.di
+package com.project.compose.feature.profile.di
 
 import com.project.compose.core.navigation.base.BaseNavGraph
-import com.project.compose.feature.info.navigation.InfoNavGraphImpl
+import com.project.compose.feature.profile.navigation.ProfileNavGraphImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -10,9 +10,9 @@ import dagger.multibindings.IntoSet
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class InfoNavModule {
+abstract class ProfileNavModule {
 
     @Binds
     @IntoSet
-    abstract fun bindInfoNavGraph(navGraph: InfoNavGraphImpl): BaseNavGraph
+    abstract fun bindProfileNavGraph(navGraph: ProfileNavGraphImpl): BaseNavGraph
 }

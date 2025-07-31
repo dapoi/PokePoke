@@ -1,7 +1,6 @@
 package com.project.compose.core.common.ui.theme
 
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -28,7 +27,7 @@ private val LightColorScheme = lightColorScheme(
     surface = SurfaceLight
 )
 
-object AppTheme {
+object PokeTheme {
     val typography: Typography
         @Composable
         @ReadOnlyComposable
@@ -36,9 +35,9 @@ object AppTheme {
 }
 
 @Composable
-fun StarterTheme(
-    typography: Typography = AppTheme.typography,
-    darkTheme: Boolean = isSystemInDarkTheme(),
+fun PokeTheme(
+    typography: Typography = PokeTheme.typography,
+    darkTheme: Boolean = false,
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
@@ -53,7 +52,7 @@ fun StarterTheme(
         else -> LightColorScheme
     }
 
-    CompositionLocalProvider(LocalTypography provides typography)  {
+    CompositionLocalProvider(LocalTypography provides typography) {
         MaterialTheme(
             colorScheme = colorScheme,
             content = content

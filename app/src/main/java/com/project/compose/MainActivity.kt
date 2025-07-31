@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import com.project.compose.core.common.ui.theme.StarterTheme
+import com.project.compose.core.common.ui.theme.PokeTheme
 import com.project.compose.core.common.utils.LocalActivity
 import com.project.compose.core.navigation.base.BaseNavGraph
 import com.project.compose.navigation.AppNavHost
@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            StarterTheme {
+            PokeTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                    CompositionLocalProvider(LocalActivity provides this) {
                        AppNavHost(navGraphs = navGraphs)
