@@ -28,13 +28,14 @@ open class BaseRepository {
         emit(Error(throwable))
     }
 
-    inline fun <T, reified C> collectApiResult(
+    inline fun <T, reified LocalType> collectApiResult(
         crossinline fetchApi: suspend () -> T,
-        crossinline transformData: (T) -> C,
-        crossinline saveToDb: suspend (C) -> Unit,
-        crossinline fetchFromDb: () -> Flow<C>
+        crossinline transformData: (T) -> LocalType,
+        crossinline saveToDb: suspend (LocalType) -> Unit,
+        crossinline fetchFromDb: () -> Flow<LocalType>
     ) = flow {
         emit(Loading)
+
         try {
             val response = fetchApi()
             val entity = transformData(response)
@@ -43,14 +44,13 @@ open class BaseRepository {
         } catch (e: Throwable) {
             emitAll(
                 fetchFromDb().map { cache ->
-                    if (
-                        (cache is Collection<*> && cache.isNotEmpty()) ||
-                        (cache !is Collection<*> && cache != null)
-                    ) {
-                        Success(cache)
-                    } else {
-                        Error(e)
+                    val isNotEmpty = when (cache) {
+                        is Collection<*> -> cache.isNotEmpty()
+                        null -> false
+                        else -> true
                     }
+
+                    if (isNotEmpty) Success(cache) else Error(e)
                 }
             )
         }

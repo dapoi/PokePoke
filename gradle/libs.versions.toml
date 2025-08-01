@@ -3,20 +3,21 @@ androidGradlePlugin = "8.11.1"
 androidTools = "31.11.1"
 androidxActivity = "1.10.1"
 androidxComposeBom = "2025.07.00"
-androidxNavigation = "2.9.2"
+androidxNavigation = "2.9.3"
 appCompat = "1.7.1"
 chucker = "4.2.0"
 coil = "3.3.0"
 coreKtxVersion = "1.16.0"
 dataStorePreferences = "1.1.7"
-espressoCore = "3.6.1"
+espressoCore = "3.7.0"
 hilt = "2.57"
 hiltNavigation = "1.2.0"
 interceptor = "5.1.0"
-junit = "1.2.1"
+junit = "1.3.0"
 kotlin = "2.2.0"
 kotlinxSerializationJson = "1.9.0"
 ksp = "2.2.0-2.0.2"
+paging = "3.3.6"
 retrofit = "3.0.0"
 room = "2.7.2"
 timber = "5.0.1"
@@ -43,8 +44,11 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 okhttp-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "interceptor" }
+paging-runtime = { group = "androidx.paging", name = "paging-runtime-ktx", version.ref = "paging" }
+paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging" }
 retrofit-lib = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }

@@ -20,6 +20,8 @@ object CollectionLibs {
             implementation(libs.coil.compose.get())
             implementation(libs.coil.network.get())
             implementation(libs.coil.video.get())
+            implementation(libs.paging.compose.get())
+            implementation(libs.paging.runtime.get())
             implementation(libs.timber.get())
         }
     }
@@ -29,8 +31,11 @@ object CollectionLibs {
             implementation(project(coreModules[1]))
             implementation(libs.dataStorePreferences.get())
             implementation(libs.okhttp.interceptor.get())
+            implementation(libs.paging.compose.get())
+            implementation(libs.paging.runtime.get())
             implementation(libs.retrofit.lib.get())
             implementation(libs.retrofit.converter.get())
+            implementation(libs.room.paging.get())
             implementation(libs.room.runtime.get())
             implementation(libs.timber.get())
             add(KSP, libs.room.compiler.get())

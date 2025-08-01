@@ -1,13 +1,15 @@
 package com.project.compose.core.data.di
 
 import android.content.Context
+import androidx.room.Room
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.project.compose.core.data.BuildConfig.DEBUG
-import com.project.compose.core.data.repository.AppRepository
-import com.project.compose.core.data.repository.AppRepositoryImpl
-import com.project.compose.core.data.source.local.AppDataStore
-import com.project.compose.core.data.source.remote.ApiService
+import com.project.compose.core.data.repository.PokemonRepository
+import com.project.compose.core.data.repository.PokemonRepositoryImpl
+import com.project.compose.core.data.source.local.db.PokemonDao
+import com.project.compose.core.data.source.local.db.PokemonDatabase
+import com.project.compose.core.data.source.remote.service.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,7 +27,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 class DataModule {
 
     @Provides
-    fun provideRepository(apiService: ApiService): AppRepository = AppRepositoryImpl(apiService)
+    fun provideRepository(
+        db: PokemonDatabase,
+        api: ApiService
+    ): PokemonRepository = PokemonRepositoryImpl(api, db)
 
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
@@ -35,7 +40,7 @@ class DataModule {
         okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit = Retrofit.Builder()
-        .baseUrl("https://api.sampleapis.com/")
+        .baseUrl("https://pokeapi.co/api/v2/")
         .addConverterFactory(gsonConverterFactory)
         .client(okHttpClient)
         .build()
@@ -57,5 +62,17 @@ class DataModule {
     ) = ChuckerInterceptor.Builder(context).collector(ChuckerCollector(context)).build()
 
     @Provides
-    fun provideDataStore(@ApplicationContext context: Context) = AppDataStore(context)
+    fun provideAppDatabase(
+        @ApplicationContext context: Context
+    ): PokemonDatabase = Room.databaseBuilder(
+        context,
+        PokemonDatabase::class.java,
+        "app_database"
+    ).fallbackToDestructiveMigration(false).build()
+
+    @Provides
+    fun provideAppDao(pokemonDatabase: PokemonDatabase): PokemonDao = pokemonDatabase.pokemonDao()
+
+    @Provides
+    fun provideRemoteKeyDao(pokemonDatabase: PokemonDatabase) = pokemonDatabase.remoteKeysDao()
 }

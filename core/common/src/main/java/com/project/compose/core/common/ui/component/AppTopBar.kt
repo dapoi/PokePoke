@@ -3,6 +3,7 @@ package com.project.compose.core.common.ui.component
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.colorScheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.centerAlignedTopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
@@ -12,7 +13,6 @@ import androidx.compose.ui.graphics.Color.Companion.Unspecified
 import com.project.compose.core.common.ui.component.attr.AppTopBarAttr.TopBarArgs
 import com.project.compose.core.common.ui.component.attr.AppTopBarAttr.actionIcons
 import com.project.compose.core.common.ui.component.attr.AppTopBarAttr.backIcon
-import com.project.compose.core.common.ui.component.attr.AppTopBarAttr.title
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,7 +24,7 @@ fun AppTopBar(
     if (centerTopBar) {
         CenterAlignedTopAppBar(
             modifier = modifier,
-            title = title(title.orEmpty()),
+            title = title ?: { Text("Pokemon Catalogue") },
             navigationIcon = backIcon(iconBack, onClickBack),
             actions = actionIcons(actionMenus),
             colors = centerAlignedTopAppBarColors(
@@ -37,7 +37,7 @@ fun AppTopBar(
     } else {
         TopAppBar(
             modifier = modifier,
-            title = title(title.orEmpty()),
+            title = title ?: { Text("Pokemon Catalogue") },
             navigationIcon = backIcon(iconBack, onClickBack),
             actions = actionIcons(actionMenus),
             colors = topAppBarColors(

@@ -55,6 +55,41 @@ open class BaseViewModel @Inject constructor() : ViewModel() {
     }
 
     /**
+     * Collects API responses as UI states and executes actions based on the state.
+     * @param response The flow of API responses to collect.
+     * @param onLoading Action to execute when the state is loading.
+     * @param onSuccess Action to execute when the state is successful.
+     * @param onFailed Action to execute when the state has failed.
+     * @param onReset Optional action to execute after a successful or failed state, typically used to reset the UI state.
+     */
+    fun <T> collectApiAsUiState(
+        response: Flow<ApiState<T>>,
+        onLoading: () -> Unit,
+        onSuccess: (T) -> Unit,
+        onFailed: (Throwable) -> Unit,
+        onReset: (() -> Unit)? = null
+    ) {
+        apiJob?.cancel()
+        apiJob = viewModelScope.launch(IO) {
+            response.collectLatest { apiState ->
+                when (apiState) {
+                    is Loading -> onLoading()
+                    is Success -> {
+                        apiState.data?.let { onSuccess(it) }
+                        delay(300)
+                        onReset?.invoke()
+                    }
+                    is Error -> {
+                        onFailed(apiState.throwable)
+                        delay(300)
+                        onReset?.invoke()
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Handles the UI state by executing the appropriate action based on the state.
      * @param onSuccess Action to execute when the state is successful.
      * @param onLoading Action to execute when the state is loading.
