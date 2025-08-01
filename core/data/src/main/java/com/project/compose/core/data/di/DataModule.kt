@@ -68,7 +68,7 @@ class DataModule {
         context,
         PokemonDatabase::class.java,
         "app_database"
-    ).fallbackToDestructiveMigration(false).build()
+    ).fallbackToDestructiveMigration(true).build()
 
     @Provides
     fun provideAppDao(pokemonDatabase: PokemonDatabase): PokemonDao = pokemonDatabase.pokemonDao()

@@ -30,4 +30,11 @@ class PokemonRepositoryImpl @Inject constructor(
             pagingSourceFactory = { db.pokemonDao().pagingSourceSearch(dbQuery) }
         ).flow
     }
+
+    override fun getPokemonDetail(id: Int) = collectApiResult(
+        fetchApi = { api.getPokemonDetail(id) },
+        transformData = { it.mapToEntity(id) },
+        saveToDb = { it?.let { pokemon -> db.pokemonDao().insertPokemon(pokemon) } },
+        fetchFromDb = { db.pokemonDao().getPokemonByIdFlow(id) }
+    )
 }

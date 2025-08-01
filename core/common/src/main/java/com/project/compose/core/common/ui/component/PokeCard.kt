@@ -13,9 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
-import coil3.compose.AsyncImage
 import com.project.compose.core.common.ui.theme.Dimens.Dp2
-import com.project.compose.core.common.ui.theme.Dimens.Dp40
 import com.project.compose.core.common.ui.theme.Dimens.Dp8
 import com.project.compose.core.common.ui.theme.Dimens.Dp80
 import com.project.compose.core.common.ui.theme.PokeTheme.typography
@@ -37,10 +35,9 @@ fun PokeCard(
             verticalArrangement = spacedBy(Dp8),
             horizontalAlignment = CenterHorizontally
         ) {
-            AsyncImage(
+            PokeImage(
                 modifier = Modifier.size(Dp80),
-                model = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png",
-                contentDescription = "Pokemon Image"
+                id = id
             )
             Text(
                 text = name,

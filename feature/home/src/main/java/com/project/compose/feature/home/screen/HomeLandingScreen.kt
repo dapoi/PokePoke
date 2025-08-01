@@ -54,7 +54,10 @@ import com.project.compose.core.common.ui.theme.Dimens.Dp120
 import com.project.compose.core.common.ui.theme.Dimens.Dp16
 import com.project.compose.core.common.ui.theme.Dimens.Dp8
 import com.project.compose.core.common.ui.theme.PokeTheme.typography
+import com.project.compose.core.common.utils.onCustomClick
 import com.project.compose.core.common.utils.state.collectAsStateValue
+import com.project.compose.core.navigation.helper.navigateTo
+import com.project.compose.core.navigation.route.HomeGraph.HomeDetailRoute
 import com.project.compose.feature.home.viewmodel.HomeLandingViewModel
 
 @Composable
@@ -162,7 +165,13 @@ internal fun HomeLandingScreen(
                     val pokemon = lazyPokemonItems[index]
                     pokemon?.let {
                         PokeCard(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .onCustomClick {
+                                    navController.navigateTo(
+                                        HomeDetailRoute(pokemonId = pokemon.id)
+                                    )
+                                },
                             id = pokemon.id,
                             name = pokemon.name
                         )
