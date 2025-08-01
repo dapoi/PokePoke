@@ -26,8 +26,9 @@ import com.project.compose.core.common.ui.theme.Dimens.Dp16
 import com.project.compose.core.common.ui.theme.PokeTheme.typography
 import com.project.compose.core.common.utils.state.collectAsStateValue
 import com.project.compose.core.data.source.local.model.UserEntity
-import com.project.compose.core.navigation.helper.navigateClearBackStack
+import com.project.compose.core.navigation.helper.navigateTo
 import com.project.compose.core.navigation.route.AuthGraph.AuthRoute
+import com.project.compose.core.navigation.route.ProfileGraph.ProfileLandingRoute
 import com.project.compose.feature.profile.viewmodel.ProfileLandingViewModel
 
 @Composable
@@ -50,6 +51,8 @@ internal fun ProfileLandingScreen(
             }
         )
     ) {
+        LaunchedEffect(Unit) { getProfile() }
+
         LaunchedEffect(profileState) {
             profileState.handleUiState(
                 onLoading = { showLoading = true },
@@ -96,8 +99,12 @@ internal fun ProfileLandingScreen(
                     Button(
                         onClick = {
                             logout()
-                            navController.navigateClearBackStack(AuthRoute)
-                        },
+                            navController.navigateTo(
+                                route = AuthRoute,
+                                popUpTo = ProfileLandingRoute::class,
+                                inclusive = true
+                            )
+                        }
                     ) {
                         Text(text = "Log Out")
                     }

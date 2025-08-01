@@ -2,6 +2,7 @@ package com.project.compose.feature.auth.screen
 
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -31,6 +32,7 @@ import com.project.compose.core.common.ui.theme.Dimens.Dp2
 import com.project.compose.core.common.ui.theme.Dimens.Dp24
 import com.project.compose.core.common.ui.theme.Dimens.Dp8
 import com.project.compose.core.common.ui.theme.PokeTheme.typography
+import com.project.compose.core.common.utils.LocalActivity
 import com.project.compose.core.common.utils.state.collectAsStateValue
 import com.project.compose.core.data.source.local.model.UserEntity
 import com.project.compose.core.navigation.helper.navigateTo
@@ -52,6 +54,7 @@ internal fun AuthScreen(
     var showError by remember { mutableStateOf("") }
     val authState = authState.collectAsStateValue()
     val context = LocalContext.current
+    val activity = LocalActivity.current
 
     val title = if (authMode == LOGIN) "Login" else "Register"
     val buttonText = if (authMode == LOGIN) "Login" else "Register"
@@ -67,17 +70,19 @@ internal fun AuthScreen(
                     navController.navigateTo(
                         route = HomeLandingRoute,
                         popUpTo = AuthRoute::class,
-                        inclusive = true
+                        inclusive = true,
+                        launchSingleTop = true
                     )
+                    resetAuthState()
                 },
                 onFailed = {
                     showLoading = false
                     showError = it.message ?: "Login failed"
+                    resetAuthState()
                 }
             )
         }
 
-        // show toast when failed
         LaunchedEffect(showError) {
             if (showError.isNotBlank()) Toast.makeText(
                 context,
@@ -86,6 +91,8 @@ internal fun AuthScreen(
             ).show()
             showError = ""
         }
+
+        BackHandler { activity.finish() }
 
         Column(
             modifier = Modifier.fillMaxSize(),

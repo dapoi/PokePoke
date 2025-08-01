@@ -12,7 +12,6 @@ import com.project.compose.core.data.source.local.model.UserEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,12 +23,8 @@ class ProfileLandingViewModel @Inject constructor(
     private val getProfileState = MutableStateFlow<UiState<UserEntity>>(StateInitial)
     val profileState = getProfileState.asStateFlow()
 
-    init {
-        getProfile()
-    }
-
-    private fun getProfile() = viewModelScope.launch {
-        repository.getUser().first().let { user ->
+    fun getProfile() = viewModelScope.launch {
+        repository.getUser().collect { user ->
             if (user != null) {
                 getProfileState.value = StateSuccess(user)
             } else {

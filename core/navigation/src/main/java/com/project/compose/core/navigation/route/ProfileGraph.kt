@@ -3,7 +3,7 @@ package com.project.compose.core.navigation.route
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class InfoGraph {
+sealed class ProfileGraph {
     @Serializable
-    data object ProfileLandingRoute : InfoGraph()
+    data object ProfileLandingRoute : ProfileGraph()
 }

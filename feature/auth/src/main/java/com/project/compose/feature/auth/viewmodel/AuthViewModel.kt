@@ -39,4 +39,8 @@ class AuthViewModel @Inject constructor(
             _authState.value = StateFailed(Throwable("Invalid username or password"))
         }
     }
+
+    fun resetAuthState() {
+        _authState.value = StateInitial
+    }
 }

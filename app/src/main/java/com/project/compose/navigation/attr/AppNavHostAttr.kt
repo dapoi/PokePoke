@@ -2,7 +2,7 @@ package com.project.compose.navigation.attr
 
 import com.project.compose.core.common.R
 import com.project.compose.core.navigation.route.HomeGraph.HomeLandingRoute
-import com.project.compose.core.navigation.route.InfoGraph.ProfileLandingRoute
+import com.project.compose.core.navigation.route.ProfileGraph.ProfileLandingRoute
 
 object AppNavHostAttr {
     data class BottomNavItem<T : Any>(
