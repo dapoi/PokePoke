@@ -28,6 +28,7 @@ dependencies {
     implementation(projects.core.common)
     implementation(projects.core.data)
     implementation(projects.core.navigation)
+    implementation(projects.feature.auth)
     implementation(projects.feature.home)
     implementation(projects.feature.profile)
 }
