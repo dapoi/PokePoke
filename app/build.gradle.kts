@@ -31,4 +31,5 @@ dependencies {
     implementation(projects.feature.auth)
     implementation(projects.feature.home)
     implementation(projects.feature.profile)
+    implementation(projects.feature.splash)
 }

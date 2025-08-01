@@ -7,7 +7,7 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.project.compose.core.data.BuildConfig.DEBUG
 import com.project.compose.core.data.repository.PokemonRepository
 import com.project.compose.core.data.repository.PokemonRepositoryImpl
-import com.project.compose.core.data.source.local.db.PokemonDao
+import com.project.compose.core.data.source.local.datastore.PokemonDataStore
 import com.project.compose.core.data.source.local.db.PokemonDatabase
 import com.project.compose.core.data.source.remote.service.ApiService
 import dagger.Module
@@ -71,8 +71,14 @@ class DataModule {
     ).fallbackToDestructiveMigration(true).build()
 
     @Provides
-    fun provideAppDao(pokemonDatabase: PokemonDatabase): PokemonDao = pokemonDatabase.pokemonDao()
+    fun provideUserDao(pokemonDatabase: PokemonDatabase) = pokemonDatabase.userDao()
+
+    @Provides
+    fun provideAppDao(pokemonDatabase: PokemonDatabase) = pokemonDatabase.pokemonDao()
 
     @Provides
     fun provideRemoteKeyDao(pokemonDatabase: PokemonDatabase) = pokemonDatabase.remoteKeysDao()
+
+    @Provides
+    fun provideDataStore(@ApplicationContext context: Context) = PokemonDataStore(context)
 }

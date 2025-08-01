@@ -33,6 +33,7 @@ import androidx.navigation.compose.rememberNavController
 import com.project.compose.core.navigation.base.BaseNavGraph
 import com.project.compose.core.navigation.helper.navigateTo
 import com.project.compose.core.navigation.route.HomeGraph.HomeLandingRoute
+import com.project.compose.core.navigation.route.SplashGraph.SplashRoute
 import com.project.compose.navigation.attr.AppNavHostAttr
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,7 +56,7 @@ internal fun AppNavHost(navGraphs: Set<@JvmSuppressWildcards BaseNavGraph>) {
                 .fillMaxSize()
                 .systemBarsPadding(),
             navController = navController,
-            startDestination = HomeLandingRoute::class
+            startDestination = SplashRoute::class
         ) {
             navGraphs.forEach { graph ->
                 with(graph) { createGraph(navController) }

@@ -1,10 +1,5 @@
 package com.project.compose.feature.home.screen
 
-import android.Manifest.permission.POST_NOTIFICATIONS
-import android.os.Build.VERSION.SDK_INT
-import android.os.Build.VERSION_CODES.TIRAMISU
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.core.tween
@@ -32,7 +27,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
@@ -65,7 +59,6 @@ internal fun HomeLandingScreen(
     navController: NavController,
     viewModel: HomeLandingViewModel = hiltViewModel()
 ) = with(viewModel) {
-    val notifPermission = rememberLauncherForActivityResult(RequestPermission()) {}
     val query = searchQuery.collectAsStateValue()
     val isSearchActive = isSearchActive.collectAsStateValue()
     val lazyPokemonItems = viewModel.pokemons.collectAsLazyPagingItems()
@@ -111,10 +104,6 @@ internal fun HomeLandingScreen(
             onClickBack = { toggleSearchQuery() }
         )
     ) {
-        LaunchedEffect(Unit) {
-            if (SDK_INT >= TIRAMISU) notifPermission.launch(POST_NOTIFICATIONS)
-        }
-
         when (val refreshState = lazyPokemonItems.loadState.refresh) {
             is LoadState.Loading -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Center) {

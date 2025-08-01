@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import com.project.compose.core.data.repository.base.BaseRepository
 import com.project.compose.core.data.source.local.db.PokemonDatabase
 import com.project.compose.core.data.source.local.model.PokemonEntity
+import com.project.compose.core.data.source.local.model.UserEntity
 import com.project.compose.core.data.source.paging.PokemonsRemoteMediator
 import com.project.compose.core.data.source.remote.service.ApiService
 import kotlinx.coroutines.flow.Flow
@@ -17,6 +18,14 @@ class PokemonRepositoryImpl @Inject constructor(
     private val api: ApiService,
     private val db: PokemonDatabase
 ) : PokemonRepository, BaseRepository() {
+    override suspend fun register(user: UserEntity) {
+        db.userDao().insertUser(user)
+    }
+
+    override suspend fun login(username: String, password: String): UserEntity? {
+        return db.userDao().getUser(username, password)
+    }
+
     override fun getPokemons() = Pager(
         config = PagingConfig(pageSize = 10),
         remoteMediator = PokemonsRemoteMediator(api, db),
