@@ -1,80 +1,36 @@
-# Jetpack Compose Starter Template
+# Pokemon Catalog
 
-A starter template for Android development using Jetpack Compose, following best practices and modularization.
+A modern Android application built with Kotlin, showcasing a catalog of Pokemon using Jetpack
+Compose and MVVM architecture. This app allows users to search for Pokemon, view detailed
+information, and manage their profiles.
 
-## Highlights
-- **Jetpack Compose UI** - Fully built using Jetpack Compose for a modern UI experience.
-- **Modularization** - Separation of concerns with a structured module-based architecture.
-- **Best Practices** - Implements MVVM, Clean Architecture, and other industry standards.
+## Features
+
+- **Pokemon Search:** Search
+- **Pokemon Detail:** View detailed information about a selected pokemon.
+- **Local Caching:** User data is cached locally using Room database.
+- **Modern UI:** Utilizes ViewModel, repository pattern, and clean navigation structure.
 
 ## Project Structure
-```
-project-root/
-├── app/                # Main application module
-├── core/common/        # Common utilities, components, and helpers
-├── core/data/          # Data handling (repository, API, database)
-│   ├── api/            # (Recommended) Separate module if you have multiple services
-├── core/navigation/    # Navigation handling module
-├── feature/home/       # Home feature module
-├── feature/info/       # Info feature module
-├── build-logic/        # Gradle convention plugins
-```
 
-## Prerequisites
-- Android Studio Meerkat or newer
-- JDK 21+
-- Gradle 8.14.2
+- `app` — Main application module
+- `build-logic` — Gradle build logic for the project and implement convention plugins
+- `core:common` — Common utilities and resources shared across features
+- `core:data` — Data layer with API and local storage integration
+- `core:navigation` — Navigation components for the app
+- `feature:auth` — Authentication feature for user login and registration
+- `feature:home` — Home screen with list (with search) & detail pokemon
+- `feature:profile` — Profile screen with user information
+- `feature:splash` — Splash screen for app initialization
 
-## Use This Template
-This repository is set up as a template! 🚀 Click the **"Use this template"** button on GitHub to create your own repository based on this starter template.
-> ![image](https://github.com/user-attachments/assets/504f2c84-f260-4c94-9123-705f1cf30d86)
+## Tech Stack
 
-## Available Technologies in the Template
+- Kotlin with MVVM architecture
+- Jetpack Compose (UI)
+- Coroutines (Reactive programming)
+- Gradle Convention Plugins
+- Room (local database)
+- Gson (JSON parsing)
+- Retrofit (networking)
 - Hilt (Dependency Injection)
-- Type Safe Jetpack Navigation
-- Coroutine & Flow
-- Retrofit & Gson
-- DataStore
-- Room Database
-
-## 🧰 Android Module Generator
-This project comes with a CLI script to auto-generate new modules in a snap.
-
-### ⚙️ How To Use
-Make the script executable:
-```bash
-chmod +x android-module-generator.sh
-```
-
-Run the generator:
-```bash
-./android-module-generator.sh
-```
-
-## 🚀 Example
-
-```
-📦 Base package (example: com.project.app): com.example.app
-📁 Parent folder (example: feature): feature
-🧩 Module name (example: home): profile
-```
-
-Generates:
-
-```
-feature/
-└── profile/
-    ├── build.gradle.kts
-    └── src/
-        └── main/
-            └── java/com/example/app/feature/profile
-```
-
-and automatically updates `settings.gradle.kts`.
-
-
-## Contribution
-Contributions are welcome! Feel free to fork the repository and submit a pull request.
-
-## ⭐ Support
-If you find this project helpful, please consider giving it a star ⭐ on GitHub. Your support is greatly appreciated!
+- Pokemon API
