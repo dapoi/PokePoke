@@ -1,5 +1,7 @@
 package com.project.compose.feature.profile.navigation
 
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import com.project.compose.core.navigation.base.BaseNavGraph
@@ -10,7 +12,10 @@ import javax.inject.Inject
 
 class ProfileNavGraphImpl @Inject constructor() : BaseNavGraph {
     override fun NavGraphBuilder.createGraph(navController: NavController) {
-        composableScreen<ProfileLandingRoute> {
+        composableScreen<ProfileLandingRoute>(
+            enterTransition = fadeIn(),
+            popExitTransition = fadeOut()
+        ) {
             ProfileLandingScreen(navController)
         }
     }

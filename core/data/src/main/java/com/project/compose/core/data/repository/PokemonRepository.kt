@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 interface PokemonRepository {
     suspend fun register(user: UserEntity)
     suspend fun login(username: String, password: String): UserEntity?
+    fun getUser(): Flow<UserEntity?>
     fun getPokemons(): Flow<PagingData<PokemonEntity>>
     fun getPokemonBySearch(query: String): Flow<PagingData<PokemonEntity>>
     fun getPokemonDetail(id: Int): Flow<ApiState<PokemonEntity>>

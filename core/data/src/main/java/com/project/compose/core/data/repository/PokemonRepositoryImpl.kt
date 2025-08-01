@@ -18,13 +18,12 @@ class PokemonRepositoryImpl @Inject constructor(
     private val api: ApiService,
     private val db: PokemonDatabase
 ) : PokemonRepository, BaseRepository() {
-    override suspend fun register(user: UserEntity) {
-        db.userDao().insertUser(user)
-    }
+    override suspend fun register(user: UserEntity) = db.userDao().register(user)
 
-    override suspend fun login(username: String, password: String): UserEntity? {
-        return db.userDao().getUser(username, password)
-    }
+    override suspend fun login(username: String, password: String): UserEntity? =
+        db.userDao().login(username, password)
+
+    override fun getUser() = db.userDao().getUser()
 
     override fun getPokemons() = Pager(
         config = PagingConfig(pageSize = 10),

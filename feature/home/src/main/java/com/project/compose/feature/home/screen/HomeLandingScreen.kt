@@ -30,7 +30,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight.Companion.Medium
 import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -85,7 +84,7 @@ internal fun HomeLandingScreen(
                 )
             } else Text(
                 text = "Pokémon Catalog",
-                style = typography.h3.copy(fontWeight = Medium)
+                style = typography.h3
             )
         }
     }

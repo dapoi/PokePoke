@@ -23,6 +23,12 @@ class PokemonDataStore @Inject constructor(context: Context) {
         preferences[KEY_TOKEN] ?: 0
     }
 
+    suspend fun clearToken() {
+        dataStore.edit { preferences ->
+            preferences.remove(KEY_TOKEN)
+        }
+    }
+
     companion object {
         val KEY_TOKEN = intPreferencesKey("token")
     }
