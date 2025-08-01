@@ -4,6 +4,13 @@ A modern Android application built with Kotlin, showcasing a catalog of Pokemon 
 Compose and MVVM architecture. This app allows users to search for Pokemon, view detailed
 information, and manage their profiles.
 
+## Demo
+
+
+
+https://github.com/user-attachments/assets/7571b148-4166-4c90-930c-232c8b63b205
+
+
 ## Features
 
 - **Pokemon Search:** Search
